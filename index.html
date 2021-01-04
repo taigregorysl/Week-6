@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body{
+			background-color: lightblue
+		}
+	</style>
+</head>
+<body>
+
+<h1>Dom Manipulation</h1>
+<input type="text" id="name" placeholder="Enter your name!">
+<button onclick="sayhello()"> Click me!</button>
+<p id="greetings"></p>
+
+<hr>
+
+<button onclick="clickMeAgain()" id="firstbtn">Disable Button</button><button id="secondbtn">Try to click me!</button>
+
+<hr>
+
+<h2>My to do list</h2>
+<input type="text" id="itemname" placeholder="Add New Item"/>
+<button onclick="addNewItem()">Add a New Item</button>
+<ul id="item-list">
+	
+</ul>
+
+<script type="text/javascript">
+
+	function addNewItem(){
+		var newItem = document.getElementById("itemname").value;
+		var newLi = document.createElement("Li");
+		newLi.innerHTML = newItem;
+		var newButton = document.createElement("button");
+		newButton.innerHTML = "Delete Me!"
+		// Adding an on click element dynaically
+		newButton.addEventListener("click" , function(){
+		//remove the LI from the item-list
+		document.getElementById("item-list").removeChild(newLi);
+	})
+		newLi.appendChild(newButton);
+		document.getElementById("item-list").appendChild(newLi);
+	}
+
+function sayhello(){
+	// Get the value from input..
+	var name = document.getElementById("name").value;
+	// Set the value on a p,span or h1
+	document.getElementById("greetings").innerHTML = "Hello " + name;
+	// Set ""(empty string) / clear the input
+	document.getElementById("name").value= "";
+}
+
+function clickMeAgain(){
+	if (document.getElementById("secondbtn").disabled == true){
+		document.getElementById("firstbtn").innerHTML = "Disable Button";
+		document.getElementById("secondbtn").removeAttribute("disabled");
+	}
+	else {
+	document.getElementById("firstbtn").innerHTML = "Enable Button";
+	document.getElementById("secondbtn").setAttribute("disabled", true);
+}
+}
+
+</script>
+
+</body>
+</html>
