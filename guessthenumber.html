@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess the number!</title>
+</head>
+<body>
+
+<h1>Guess the number!</h1>
+<h2>Enter the number</h2>
+
+<input type="number" id="number" placeholder="Your guess"/>
+<button id="guessButton" onclick="tryYourLuck()">Click me!</button>
+<button id="restartButton" onclick="restartPressed()" hidden="true">Restart</button>
+
+<p id="message"></p>
+
+<script type="text/javascript">
+
+
+	//a new number will be generated
+	//user will have 5 chances
+	//the guess button will be activated
+	//the restart button hidden
+
+var computerNumber = Math.ceil(Math.random()*100)
+var chances = 5;
+
+function restartPressed(){
+
+computerNumber = Math.ceil(Math.random()*100)
+chances = 5;
+
+document.getElementById("guessButton").removeAttribute("disabled")
+document.getElementById("restartButton").setAttribute("hidden",true)
+document.getElementById("message").innerHTML="";
+
+}
+
+
+
+function tryYourLuck(){
+
+var guess = document.getElementById("number").value;
+
+if(computerNumber > guess){
+ chances--
+ if(chances> 0){
+ 	 document.getElementById("message").innerHTML = "Your number is too low";
+ }
+ else{
+ 		document.getElementById("message").innerHTML = "Number too low. Sorry you lose. The number is "+computerNumber
+ 		document.getElementById("guessButton").setAttribute("disabled", true)
+		document.getElementById("restartButton").removeAttribute("hidden")
+ }
+}
+else if(computerNumber < guess){
+chances--
+	if (chances > 0){
+		document.getElementById("message").innerHTML= "Your number is too high";
+	}
+	else{
+	document.getElementById("message").innerHTML = "Number too high. Sorry you lose. The number is "+computerNumber
+	document.getElementById("guessButton").setAttribute("disabled", true)
+	document.getElementById("restartButton").removeAttribute("hidden")
+	}
+}
+else{
+document.getElementById("message").innerHTML = "Wow not bad you guessed it";
+document.getElementById("guessButton").setAttribute("disabled", true)
+document.getElementById("restartButton").removeAttribute("hidden")
+}
+
+document.getElementById("number").value ="";
+}
+
+</script>
+
+</body>
+</html>
